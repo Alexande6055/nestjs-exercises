@@ -74,7 +74,7 @@ export default function Home() {
             </table>
             {
                 visibleForm && (
-                    <FormCreateProduct />
+                    <FormCreateProduct onClose={()=>{setVisibleForm(false)}}/>
                 )
             }
         </div>
