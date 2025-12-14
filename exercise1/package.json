@@ -1,0 +1,17 @@
+{
+  "name": "exercise1",
+  "version": "1.0.0",
+  "description": "Back-End y Front-End en un solo lugar ",
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "start:back": "pnpm --prefix crud-productos start:dev",
+    "start:front": "pnpm --prefix front-end dev",
+    "start": "concurrently \"npm run start:back\" \"npm run start:front\"",
+    "start:app": "concurrently \"npm run start:back\" \"npm run start:front\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
