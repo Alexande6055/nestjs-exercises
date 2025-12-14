@@ -5,13 +5,14 @@ import { FormCreateProduct } from "../components/FormCreateProduct"
 export default function Home() {
     const [visibleForm, setVisibleForm] = useState<boolean>(false)
     const [productos, setProductos] = useState<{ id: number, nombre: string, cantidadDisponible: number }[]>([])
+    const [refrescar, setRefrescar] = useState<boolean>(false)
     useEffect(() => {
         const peticionFetch = async () => {
             const productosApi = await ApiProducto.getProductos()
             setProductos(productosApi)
         }
         peticionFetch()
-    }, [])
+    }, [refrescar])
 
     return (
 
@@ -60,7 +61,16 @@ export default function Home() {
                         </tr>
                     ))}
                 </tbody>
-               
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td >
+                            <button className="bg-blue-600 shadow px-6 py-3 rounded-lg font-bold text-white hover:bg-blue-700" onClick={() => { setRefrescar(!refrescar) }}>Actualizar tabla</button>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
             {
                 visibleForm && (
