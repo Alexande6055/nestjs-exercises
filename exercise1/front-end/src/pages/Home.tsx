@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { ApiProducto } from "../services/productos"
+import { FormCreateProduct } from "../components/FormCreateProduct"
 
 export default function Home() {
+    const [visibleForm, setVisibleForm] = useState<boolean>(false)
     const [productos, setProductos] = useState<{ id: number, nombre: string, cantidadDisponible: number }[]>([])
     useEffect(() => {
         const peticionFetch = async () => {
@@ -12,13 +14,18 @@ export default function Home() {
     }, [])
 
     return (
+
         <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-linear-to-br from-indigo-500 to-purple-600">
             <h1 className="text-5xl font-extrabold text-white drop-shadow-md">
                 Hello World!!
             </h1>
 
-            <button className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition">
-                Crear Producto</button>
+            <button
+                className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition"
+                onClick={() => { setVisibleForm(true) }}
+            >
+                Crear Producto
+            </button>
             <table className="w-full max-w-4xl bg-white rounded-lg shadow-md overflow-hidden">
                 <thead className="bg-blue-600 text-white">
                     <tr>
@@ -53,7 +60,15 @@ export default function Home() {
                         </tr>
                     ))}
                 </tbody>
+               
             </table>
+            {
+                visibleForm && (
+                    <FormCreateProduct />
+                )
+            }
         </div>
+
+
     )
 }
